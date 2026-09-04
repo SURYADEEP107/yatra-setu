@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YatraSetu | Vikshit Bharat Tourism</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🇮🇳 YatraSetu <span class="tagline">| Vikshit Bharat</span></div>
+        <div class="nav-links">
+            <!-- FIX: Added welcome message span and auth-btn ID -->
+            <span id="welcome-msg" style="display:none; font-weight:600; margin-right: 15px; color: var(--dark);"></span>
+            <button id="my-trips-btn" class="nav-btn" style="display:none;">🎒 My Trips</button>
+            <button id="auth-btn" class="nav-btn login">Login</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Discover the Heart of India</h1>
+            <p>Smart Travel for a Developing Nation. Find your next adventure while supporting local economies.</p>
+        </div>
+        
+        <div class="search-panel">
+            <form id="search-form">
+                <div class="input-group">
+                    <label>Landscape Type 🏔️</label>
+                    <select id="landscape">
+                        <option value="All">All Landscapes</option>
+                        <!-- Options auto-populated by JS -->
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>State / Region 📍</label>
+                    <select id="state">
+                        <option value="All">All States</option>
+                        <!-- Options auto-populated by JS -->
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Max Budget (₹) 💳</label>
+                    <input type="number" id="budget" placeholder="e.g. 15000">
+                </div>
+                <button type="submit" class="cta-btn">Search Trips 🚀</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="grid-container" id="results-grid"></main>
+
+    <!-- Trip Finalization Modal -->
+    <div id="trip-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title">Trip Details</h2>
+            <div class="modal-grid">
+                <div class="logistics">
+                    <h3>🚆 Travel Modes (Est. from Kolkata)</h3>
+                    <ul id="modal-transport"></ul>
+                    <h3>🏥 Essential Services</h3>
+                    <p>Nearby Medical Care: <strong id="modal-hospital"></strong></p>
+                </div>
+                <div class="local-economy">
+                    <h3>🛍️ Support Local (Vikshit Bharat)</h3>
+                    <div class="ad-card">
+                        <h4>Hire a Local Guide</h4>
+                        <p>Empower local youth. Certified guides available from ₹800/day.</p>
+                    </div>
+                    <div class="ad-card">
+                        <h4>Authentic Stays</h4>
+                        <p>Homestays vetted for safety, hygiene, and local cultural immersion.</p>
+                    </div>
+                </div>
+            </div>
+            <button id="save-trip-btn" class="cta-btn full-width">Save to My Trips 🎒</button>
+        </div>
+    </div>
+
+    <!-- Login Modal (FIX: Added display:none so it doesn't block screen) -->
+    <div id="login-modal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 400px;">
+            <span class="close-btn" id="close-login">&times;</span>
+            <h2>Login to YatraSetu</h2>
+            <input type="text" id="username-input" placeholder="Enter your username">
+            <!-- FIX: Changed search-btn to cta-btn to use your existing CSS style -->
+            <button id="submit-login" class="cta-btn full-width" style="margin-top: 1rem;">Login</button>
+        </div>
+    </div>
+
+    <!-- My Trips Modal (FIX: Added display:none) -->
+    <div id="trips-modal" class="modal" style="display: none;">
+        <div class="modal-content large-modal" style="max-width: 900px; max-height: 80vh; overflow-y: auto;">
+            <span class="close-btn" id="close-trips">&times;</span>
+            <h2 style="text-align:center;">My Saved Trips</h2>
+            <!-- FIX: Reused your grid-container class to style the cards correctly inside the modal -->
+            <div id="saved-trips-container" class="grid-container" style="padding: 2rem 0;"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
